@@ -23,6 +23,8 @@
     font-family: inherit;
   }
   .btn:hover { transform: translateY(-1px); }
+  .btn.ink { background: var(--ink); color: var(--paper); box-shadow: 4px 4px 0 rgba(28,25,23,.25); }
+  .btn[disabled] { opacity: .55; cursor: default; transform: none; }
   .hint { font-size: 10px; color: var(--ink-faint); text-align: center; margin-top: 6px; letter-spacing: .06em; }
   .rule { border-top: 1.5px dashed var(--rule); margin: 14px 0; }
   label { display: block; font-size: 10px; font-weight: 700; letter-spacing: .1em; margin-bottom: 4px; }
@@ -30,17 +32,22 @@
     width: 100%; padding: 7px 8px; border: 2px solid var(--ink); background: var(--card);
     font: 11px inherit; font-family: inherit;
   }
-  .row { display: flex; gap: 8px; margin-top: 10px; }
-  .row > div { flex: 1; }
-  .keynote { font-size: 10px; color: var(--ink-faint); margin-top: 5px; }
-  .keynote a { color: var(--deep); font-weight: 700; }
+  .row { display: flex; gap: 8px; align-items: flex-end; }
+  .row .grow { flex: 1; }
+  .mini {
+    padding: 8px 12px; background: var(--ink); color: var(--paper); border: 0; cursor: pointer;
+    font: 700 10.5px inherit; font-family: inherit; letter-spacing: .06em; white-space: nowrap;
+  }
+  .note { font-size: 10px; color: var(--ink-faint); margin-top: 6px; }
+  .note a, .note .tbtn { color: var(--deep); font-weight: 700; }
+  .err { font-size: 10.5px; font-weight: 700; color: var(--deep); margin-top: 6px; }
   .thead { display: flex; justify-content: space-between; align-items: baseline; }
   .tbtn {
     background: none; border: 0; cursor: pointer; font: 700 10px inherit;
     font-family: inherit; letter-spacing: .08em; color: var(--deep); padding: 0;
   }
   .tbtn.dim { color: var(--ink-faint); }
-  #transcript { margin-top: 8px; max-height: 200px; overflow: auto; }
+  #transcript { margin-top: 8px; max-height: 190px; overflow: auto; }
   .entry {
     background: var(--card); border: 1.5px solid var(--rule); padding: 8px 10px;
     margin-bottom: 6px; white-space: pre-wrap; word-break: break-word;
@@ -51,42 +58,68 @@
   .empty { font-size: 11px; color: var(--ink-faint); padding: 10px 0; }
   .foot { font-size: 9.5px; letter-spacing: .06em; color: var(--ink-faint); margin-top: 12px; text-align: center; }
   .foot a { color: var(--deep); font-weight: 700; }
+  .hidden { display: none !important; }
+  .who { display: flex; justify-content: space-between; align-items: baseline; }
+  .who b { font-size: 11px; letter-spacing: .02em; }
 </style>
 </head>
 <body>
   <h1>PENNY<span class="coin">_</span>OCR SNIP</h1>
-  <div class="sub">$0.75 / 1,000 PAGES · 3 FREE SNIPS A DAY, NO ACCOUNT</div>
+  <div class="sub" id="tagline">$0.75 / 1,000 PAGES · 3 FREE SNIPS A DAY</div>
 
   <button id="snip" class="btn">SNIP A REGION →</button>
   <div class="hint">OR PRESS ALT+SHIFT+P · RIGHT-CLICK ANY IMAGE</div>
 
   <div class="rule"></div>
 
+  <!-- signed out -->
+  <div id="authOut">
+    <div class="row">
+      <div class="grow">
+        <label>SIGN IN — 100 FREE PAGES/MONTH</label>
+        <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
+      </div>
+      <button id="sendCode" class="mini">EMAIL ME A CODE</button>
+    </div>
+    <div id="codeRow" class="row hidden" style="margin-top:8px">
+      <div class="grow">
+        <label>CODE FROM YOUR INBOX</label>
+        <input id="code" inputmode="numeric" maxlength="6" placeholder="6 digits" />
+      </div>
+      <button id="verify" class="mini">SIGN IN</button>
+    </div>
+    <div id="authErr" class="err hidden"></div>
+    <div class="note">No account? One is created for you — no password, no card.
+      Prefer a key? <button id="showKey" class="tbtn">paste it</button></div>
+    <div id="keyRow" class="hidden" style="margin-top:8px">
+      <input id="apiKey" type="password" placeholder="pk_live_…" />
+    </div>
+  </div>
+
+  <!-- signed in -->
+  <div id="authIn" class="hidden">
+    <div class="who">
+      <b id="whoEmail"></b>
+      <button id="signOut" class="tbtn dim">SIGN OUT</button>
+    </div>
+    <div class="note">Snips bill to your account — 100 pages free each month.
+      <a href="https://pennyocr.com/dashboard/?utm_source=chrome_ext" target="_blank">Usage & credits →</a></div>
+  </div>
+
+  <div class="rule"></div>
+
   <div class="thead">
     <label>TRANSCRIPT</label>
     <span>
-      <button id="copyAll" class="tbtn">COPY ALL</button>
+      <select id="format" style="width:auto;padding:2px 4px;border-width:1.5px;font-size:9.5px">
+        <option value="markdown">MD</option>
+        <option value="text">TXT</option>
+      </select>
+      &nbsp;<button id="copyAll" class="tbtn">COPY ALL</button>
       &nbsp;<button id="clear" class="tbtn dim">CLEAR</button>
     </span>
   </div>
   <div id="transcript"><div class="empty">Snips land here — click one to copy it again.</div></div>
-
-  <div class="rule"></div>
-
-  <div class="row">
-    <div style="flex:2">
-      <label>API KEY (OPTIONAL)</label>
-      <input id="apiKey" type="password" placeholder="pk_… for 100 free pages/mo" />
-    </div>
-    <div>
-      <label>OUTPUT</label>
-      <select id="format">
-        <option value="markdown">MARKDOWN</option>
-        <option value="text">PLAIN TEXT</option>
-      </select>
-    </div>
-  </div>
-  <div class="keynote">No key? Snips use the free demo tier (3/day). <a id="getkey" href="https://pennyocr.com/dashboard/?utm_source=chrome_ext&utm_medium=extension&utm_campaign=popup" target="_blank">Get a free key</a> — 100 pages/month.</div>
 
   <div class="foot"><a href="https://pennyocr.com/?utm_source=chrome_ext" target="_blank">PENNYOCR.COM</a> · THANK YOU, COME AGAIN</div>
 

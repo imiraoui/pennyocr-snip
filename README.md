@@ -22,9 +22,9 @@ terrible scans — [99.5% character accuracy on the public
 benchmark](https://pennyocr.com/blog/receipt-ocr-benchmark/) — at $0.75 per
 1,000 snips.
 
-**No account needed to try it**: 3 free snips a day. A
-[free API key](https://pennyocr.com/dashboard/) raises that to 100 pages/month,
-paid credits go from there.
+**No account needed to try it**: 3 free snips a day. Want more? Type your
+email in the popup, enter the 6-digit code from your inbox, and you're signed
+in — 100 free pages a month, no password, no card, no key to copy around.
 
 ## Install
 
@@ -46,6 +46,14 @@ the last 200 snips so a multi-page reading session ends with one **COPY ALL**.
 
 Markdown output preserves structure (tables come back as tables); switch to
 plain text in the popup if you just want the words.
+
+## Sign in
+
+Email → 6-digit code → done. Behind the scenes the extension mints an API key
+named "Chrome extension" on your (new or existing) PennyOCR account and stores
+it locally — you never handle a key, and you can revoke that key any time from
+the [dashboard](https://pennyocr.com/dashboard/). Prefer pasting an existing
+key? There's a link for that in the popup.
 
 ## Privacy
 

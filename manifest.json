@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "PennyOCR Snip",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Snip any region of any page — or right-click an image — and get the text back. VLM-quality OCR for $0.75 per 1,000 pages, 3 free snips a day with no account.",
   "permissions": ["activeTab", "scripting", "contextMenus", "storage"],
   "host_permissions": ["https://api.pennyocr.com/*"],
