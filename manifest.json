@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "PennyOCR Snip",
+  "version": "0.1.0",
+  "description": "Snip any region of any page — or right-click an image — and get the text back. VLM-quality OCR for $0.75 per 1,000 pages, 3 free snips a day with no account.",
+  "permissions": ["activeTab", "scripting", "contextMenus", "storage"],
+  "host_permissions": ["https://api.pennyocr.com/*"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "PennyOCR Snip — Alt+Shift+P to snip"
+  },
+  "commands": {
+    "snip-region": {
+      "suggested_key": { "default": "Alt+Shift+P" },
+      "description": "Snip a region and OCR it"
+    }
+  },
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" }
+}

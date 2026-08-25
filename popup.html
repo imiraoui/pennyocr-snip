@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  :root {
+    --paper: #f4efe4; --card: #fdfaf2; --ink: #1c1917; --ink-soft: #44403c;
+    --ink-faint: #78716c; --copper: #b87333; --deep: #96562a; --rule: #d3c9b4;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 340px; background: var(--paper); color: var(--ink);
+    font: 12px/1.6 "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    padding: 14px;
+  }
+  h1 { font-size: 13px; letter-spacing: .14em; }
+  h1 .coin { color: var(--deep); }
+  .sub { font-size: 10px; letter-spacing: .08em; color: var(--ink-faint); margin-top: 2px; }
+  .btn {
+    display: block; width: 100%; margin-top: 12px; padding: 11px 0; text-align: center;
+    background: var(--copper); color: #fff; font: 700 12px/1 inherit; letter-spacing: .06em;
+    border: 0; cursor: pointer; box-shadow: 4px 4px 0 var(--ink);
+    font-family: inherit;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .hint { font-size: 10px; color: var(--ink-faint); text-align: center; margin-top: 6px; letter-spacing: .06em; }
+  .rule { border-top: 1.5px dashed var(--rule); margin: 14px 0; }
+  label { display: block; font-size: 10px; font-weight: 700; letter-spacing: .1em; margin-bottom: 4px; }
+  input, select {
+    width: 100%; padding: 7px 8px; border: 2px solid var(--ink); background: var(--card);
+    font: 11px inherit; font-family: inherit;
+  }
+  .row { display: flex; gap: 8px; margin-top: 10px; }
+  .row > div { flex: 1; }
+  .keynote { font-size: 10px; color: var(--ink-faint); margin-top: 5px; }
+  .keynote a { color: var(--deep); font-weight: 700; }
+  .thead { display: flex; justify-content: space-between; align-items: baseline; }
+  .tbtn {
+    background: none; border: 0; cursor: pointer; font: 700 10px inherit;
+    font-family: inherit; letter-spacing: .08em; color: var(--deep); padding: 0;
+  }
+  .tbtn.dim { color: var(--ink-faint); }
+  #transcript { margin-top: 8px; max-height: 200px; overflow: auto; }
+  .entry {
+    background: var(--card); border: 1.5px solid var(--rule); padding: 8px 10px;
+    margin-bottom: 6px; white-space: pre-wrap; word-break: break-word;
+    max-height: 90px; overflow: hidden; cursor: pointer; font-size: 11px;
+  }
+  .entry:hover { border-color: var(--copper); }
+  .when { font-size: 9px; color: var(--ink-faint); letter-spacing: .08em; margin-bottom: 3px; }
+  .empty { font-size: 11px; color: var(--ink-faint); padding: 10px 0; }
+  .foot { font-size: 9.5px; letter-spacing: .06em; color: var(--ink-faint); margin-top: 12px; text-align: center; }
+  .foot a { color: var(--deep); font-weight: 700; }
+</style>
+</head>
+<body>
+  <h1>PENNY<span class="coin">_</span>OCR SNIP</h1>
+  <div class="sub">$0.75 / 1,000 PAGES · 3 FREE SNIPS A DAY, NO ACCOUNT</div>
+
+  <button id="snip" class="btn">SNIP A REGION →</button>
+  <div class="hint">OR PRESS ALT+SHIFT+P · RIGHT-CLICK ANY IMAGE</div>
+
+  <div class="rule"></div>
+
+  <div class="thead">
+    <label>TRANSCRIPT</label>
+    <span>
+      <button id="copyAll" class="tbtn">COPY ALL</button>
+      &nbsp;<button id="clear" class="tbtn dim">CLEAR</button>
+    </span>
+  </div>
+  <div id="transcript"><div class="empty">Snips land here — click one to copy it again.</div></div>
+
+  <div class="rule"></div>
+
+  <div class="row">
+    <div style="flex:2">
+      <label>API KEY (OPTIONAL)</label>
+      <input id="apiKey" type="password" placeholder="pk_… for 100 free pages/mo" />
+    </div>
+    <div>
+      <label>OUTPUT</label>
+      <select id="format">
+        <option value="markdown">MARKDOWN</option>
+        <option value="text">PLAIN TEXT</option>
+      </select>
+    </div>
+  </div>
+  <div class="keynote">No key? Snips use the free demo tier (3/day). <a id="getkey" href="https://pennyocr.com/dashboard/?utm_source=chrome_ext&utm_medium=extension&utm_campaign=popup" target="_blank">Get a free key</a> — 100 pages/month.</div>
+
+  <div class="foot"><a href="https://pennyocr.com/?utm_source=chrome_ext" target="_blank">PENNYOCR.COM</a> · THANK YOU, COME AGAIN</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
