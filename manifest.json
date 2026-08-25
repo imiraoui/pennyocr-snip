@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "PennyOCR Snip",
   "version": "0.3.0",
-  "description": "Snip any region of any page \u2014 or right-click an image \u2014 and get the text back. VLM-quality OCR for $0.75 per 1,000 pages, 3 free snips a day with no account.",
+  "description": "Turn screenshots, charts, scans, and images into clean text or Markdown. Try 3 free snips monthly—no account needed.",
   "permissions": [
     "activeTab",
     "scripting",
