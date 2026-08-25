@@ -22,9 +22,11 @@ terrible scans — [99.5% character accuracy on the public
 benchmark](https://pennyocr.com/blog/receipt-ocr-benchmark/) — at $0.75 per
 1,000 snips.
 
-**No account needed to try it**: 3 free snips a day. Want more? Type your
+**No account needed to try it**: 3 free snips a month. Want more? Type your
 email in the popup, enter the 6-digit code from your inbox, and you're signed
-in — 100 free pages a month, no password, no card, no key to copy around.
+in — 30 free snips a month (your first 100 pages are free), no password, no
+card, no key to copy around. Your credit balance lives in the popup, next to a
+one-click **REFILL** button.
 
 ## Install
 
@@ -37,12 +39,13 @@ in — 100 free pages a month, no password, no card, no key to copy around.
 
 | | |
 | --- | --- |
-| <kbd>⌥⇧P</kbd> (or the popup button) | Drag out a region, get the text |
+| <kbd>⌥⇧P</kbd> — Option+Shift+P on Mac, Alt+Shift+P elsewhere (or the popup button) | Drag out a region, get the text |
 | Right-click an image → **OCR this image with PennyOCR** | Reads the image where it sits |
 | Popup | Running transcript of every snip — copy one, or copy all |
 
 Every result is copied to your clipboard the moment it arrives. The popup keeps
-the last 200 snips so a multi-page reading session ends with one **COPY ALL**.
+your recent snips, and **HISTORY →** opens a full-page, searchable archive of
+the last 500 — copy one, copy all, or delete the embarrassing ones.
 
 Markdown output preserves structure (tables come back as tables); switch to
 plain text in the popup if you just want the words.

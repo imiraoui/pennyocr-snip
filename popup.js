@@ -14,9 +14,12 @@ function renderAuth(apiKey, email) {
   $("authOut").classList.toggle("hidden", signedIn);
   $("authIn").classList.toggle("hidden", !signedIn);
   $("tagline").textContent = signedIn
-    ? "$0.75 / 1,000 PAGES · FIRST 100 FREE EVERY MONTH"
-    : "$0.75 / 1,000 PAGES · 3 FREE SNIPS A DAY";
-  if (signedIn) $("whoEmail").textContent = (email || "SIGNED IN").toUpperCase();
+    ? "$0.75 / 1,000 PAGES · FIRST 100 PAGES FREE"
+    : "3 FREE SNIPS A MONTH · SIGN IN FOR 30/MONTH";
+  if (signedIn) {
+    $("whoEmail").textContent = (email || "SIGNED IN").toUpperCase();
+    loadBalance(apiKey);
+  }
 }
 
 function authErr(msg) {
@@ -83,7 +86,7 @@ async function doVerify() {
         "content-type": "application/json",
         authorization: `Bearer ${body.session_token}`,
       },
-      body: JSON.stringify({ name: "Chrome extension" }),
+      body: JSON.stringify({ name: "Chrome extension", free_cap: 30 }),
     });
     const kb = await kr.json().catch(() => ({}));
     if (!kr.ok || !kb.api_key) throw new Error("Signed in, but couldn't set up the key — try again.");
@@ -157,5 +160,52 @@ $("clear").addEventListener("click", async () => {
 $("format").addEventListener("change", (e) =>
   chrome.storage.local.set({ format: e.target.value })
 );
+
+async function loadBalance(apiKey) {
+  try {
+    const r = await fetch(`${API_BASE}/v1/balance`, { headers: { authorization: `Bearer ${apiKey}` } });
+    const b = await r.json();
+    if (!r.ok) throw new Error();
+    const bits = [`CREDITS: ${b.credit_pages.toLocaleString()} PAGES (≈$${b.credit_value_usd})`];
+    if (b.key_free_cap_month != null) {
+      bits.push(`FREE SNIPS LEFT THIS MONTH: ${Math.max(0, b.key_free_cap_month - b.key_free_used_month)}/${b.key_free_cap_month}`);
+    }
+    bits.push(`LIFETIME FREE PAGES LEFT: ${b.free_pages_remaining}`);
+    $("balanceRow").textContent = bits.join(" · ");
+  } catch {
+    $("balanceRow").textContent = "Couldn't load balance — snips still work.";
+  }
+}
+
+$("refill").addEventListener("click", async () => {
+  const { apiKey } = await chrome.storage.local.get("apiKey");
+  if (!apiKey) return;
+  $("refill").disabled = true;
+  $("refill").textContent = "OPENING STRIPE…";
+  try {
+    const r = await fetch(`${API_BASE}/v1/billing/checkout`, {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify({ pack: "10k" }),
+    });
+    const b = await r.json();
+    if (!r.ok || !b.url) throw new Error();
+    chrome.tabs.create({ url: b.url });
+    window.close();
+  } catch {
+    $("refill").textContent = "FAILED — TRY THE DASHBOARD";
+    $("refill").disabled = false;
+  }
+});
+
+$("viewAll").addEventListener("click", () => {
+  chrome.tabs.create({ url: chrome.runtime.getURL("history.html") });
+});
+
+// Alt reads as Option on Mac — say so.
+if (navigator.platform.toUpperCase().includes("MAC")) {
+  document.getElementById("shortcutHint").textContent =
+    "OR PRESS ⌥ OPTION + ⇧ SHIFT + P · RIGHT-CLICK ANY IMAGE";
+}
 
 load();

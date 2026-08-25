@@ -65,10 +65,10 @@
 </head>
 <body>
   <h1>PENNY<span class="coin">_</span>OCR SNIP</h1>
-  <div class="sub" id="tagline">$0.75 / 1,000 PAGES · 3 FREE SNIPS A DAY</div>
+  <div class="sub" id="tagline">3 FREE SNIPS A MONTH · SIGN IN FOR 30/MONTH</div>
 
   <button id="snip" class="btn">SNIP A REGION →</button>
-  <div class="hint">OR PRESS ALT+SHIFT+P · RIGHT-CLICK ANY IMAGE</div>
+  <div class="hint" id="shortcutHint">OR PRESS ALT+SHIFT+P · RIGHT-CLICK ANY IMAGE</div>
 
   <div class="rule"></div>
 
@@ -76,7 +76,7 @@
   <div id="authOut">
     <div class="row">
       <div class="grow">
-        <label>SIGN IN — 100 FREE PAGES/MONTH</label>
+        <label>SIGN IN — 30 FREE SNIPS A MONTH</label>
         <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
       </div>
       <button id="sendCode" class="mini">EMAIL ME A CODE</button>
@@ -89,7 +89,7 @@
       <button id="verify" class="mini">SIGN IN</button>
     </div>
     <div id="authErr" class="err hidden"></div>
-    <div class="note">No account? One is created for you — no password, no card.
+    <div class="note">No account? One is created for you — first 100 pages free, no password, no card.
       Prefer a key? <button id="showKey" class="tbtn">paste it</button></div>
     <div id="keyRow" class="hidden" style="margin-top:8px">
       <input id="apiKey" type="password" placeholder="pk_live_…" />
@@ -102,8 +102,11 @@
       <b id="whoEmail"></b>
       <button id="signOut" class="tbtn dim">SIGN OUT</button>
     </div>
-    <div class="note">Snips bill to your account — 100 pages free each month.
-      <a href="https://pennyocr.com/dashboard/?utm_source=chrome_ext" target="_blank">Usage & credits →</a></div>
+    <div id="balanceRow" class="note" style="margin-top:6px">Loading balance…</div>
+    <div class="row" style="margin-top:8px">
+      <button id="refill" class="mini" style="flex:1;background:var(--copper)">REFILL — 10,000 PAGES / $7.50</button>
+      <a href="https://pennyocr.com/dashboard/?utm_source=chrome_ext" target="_blank" class="tbtn" style="align-self:center">MORE →</a>
+    </div>
   </div>
 
   <div class="rule"></div>
@@ -116,6 +119,7 @@
         <option value="text">TXT</option>
       </select>
       &nbsp;<button id="copyAll" class="tbtn">COPY ALL</button>
+      &nbsp;<button id="viewAll" class="tbtn">HISTORY →</button>
       &nbsp;<button id="clear" class="tbtn dim">CLEAR</button>
     </span>
   </div>
