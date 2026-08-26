@@ -5,6 +5,10 @@
 </p>
 
 <p align="center">
+  <a href="https://chromewebstore.google.com/detail/pennyocr-snip/mpbmgjggnjmembmagibkgeldehgcipgn"><b>▶ Install from the Chrome Web Store</b></a>
+</p>
+
+<p align="center">
   <img alt="Manifest V3" src="https://img.shields.io/badge/Manifest-V3-4c8dff">
   <img alt="VLM OCR" src="https://img.shields.io/badge/OCR-vision--language%20model-b87333">
   <img alt="3 free/day, no account" src="https://img.shields.io/badge/free%20tier-3%20snips%2Fday%2C%20no%20account-1f7a4d">
@@ -29,6 +33,10 @@ card, no key to copy around. Your credit balance lives in the popup, next to a
 one-click **REFILL** button.
 
 ## Install
+
+**[Add to Chrome from the Web Store](https://chromewebstore.google.com/detail/pennyocr-snip/mpbmgjggnjmembmagibkgeldehgcipgn)** — one click, then pin the coin.
+
+Or load it yourself from source:
 
 1. [Download this repo](../../archive/refs/heads/main.zip) or `git clone` it
 2. Open `chrome://extensions`, enable **Developer mode**
