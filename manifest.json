@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "PennyOCR Snip",
-  "version": "0.3.0",
-  "description": "Turn screenshots, charts, scans, and images into clean text or Markdown. Try 3 free snips monthly—no account needed.",
+  "name": "PennyOCR Snip: Screenshot to Text (OCR)",
+  "version": "0.4.0",
+  "description": "Screenshot to text in one click. OCR any image, chart, scan or locked PDF into clean text or Markdown. 3 free snips, no account.",
   "permissions": [
     "activeTab",
     "scripting",
