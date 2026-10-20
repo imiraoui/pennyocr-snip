@@ -28,7 +28,7 @@ benchmark](https://pennyocr.com/blog/receipt-ocr-benchmark/) — at $0.75 per
 
 **No account needed to try it**: 3 free snips a month. Want more? Type your
 email in the popup, enter the 6-digit code from your inbox, and you're signed
-in — 30 free snips a month (your first 100 pages are free), no password, no
+in — 30 free snips a month (your first 50 pages are free), no password, no
 card, no key to copy around. Your credit balance lives in the popup, next to a
 one-click **REFILL** button.
 

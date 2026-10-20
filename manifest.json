@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "PennyOCR Snip: Screenshot to Text (OCR)",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Screenshot to text in one click. OCR any image, chart, scan or locked PDF into clean text or Markdown. 3 free snips, no account.",
   "permissions": [
     "activeTab",

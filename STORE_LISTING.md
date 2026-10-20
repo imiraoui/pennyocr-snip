@@ -25,7 +25,7 @@ WHAT YOU GET
 
 TRY IT WITHOUT AN ACCOUNT
 
-Get 3 free snips each month with no sign-up. Sign in by email for 30 free snips per month and your first 100 API pages free. Additional usage is $0.75 per 1,000 pages.
+Get 3 free snips each month with no sign-up. Sign in by email for 30 free snips per month and your first 50 API pages free. Additional usage is $0.75 per 1,000 pages.
 
 BUILT FOR PRIVACY
 

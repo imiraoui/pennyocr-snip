@@ -14,7 +14,7 @@ function renderAuth(apiKey, email) {
   $("authOut").classList.toggle("hidden", signedIn);
   $("authIn").classList.toggle("hidden", !signedIn);
   $("tagline").textContent = signedIn
-    ? "$0.75 / 1,000 PAGES · FIRST 100 PAGES FREE"
+    ? "$0.75 / 1,000 PAGES · FIRST 50 PAGES FREE"
     : "3 FREE SNIPS A MONTH · SIGN IN FOR 30/MONTH";
   if (signedIn) {
     $("whoEmail").textContent = (email || "SIGNED IN").toUpperCase();
